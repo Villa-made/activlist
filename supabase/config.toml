@@ -1,0 +1,7 @@
+# Supabase project configuration (only what T01.a needs; later subtasks may extend it).
+# Reference: https://supabase.com/docs/guides/local-development/cli/config
+
+[functions.api]
+enabled = true
+# Authorization is done per route inside the function (public routes: /feed, /media/{id}, /reports).
+verify_jwt = false

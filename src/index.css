@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  /* ── 1. BASE SURFACES (60% Dominant Neutral Canvas — Forest Charcoal & Deep Slate) ── */
+  --bg-canvas: #070D0A;          /* Negro vegetal profundo */
+  --bg-surface-1: #0D1612;       /* Carbón forestal — cards primarias */
+  --bg-surface-2: #13201A;       /* Slate botánico — inputs, hover, paneles secundarios */
+  --bg-surface-glass: rgba(13, 22, 18, 0.84);
+
+  /* ── 2. STRUCTURAL BORDERS & HAIRLINES (30% Structural Surfaces) ── */
+  --border-hairline: rgba(240, 245, 242, 0.08);
+  --border-subtle: #1D3026;
+  --border-focus: #7CE83A;
+
+  /* ── 3. TYPOGRAPHY & NEUTRALS (Off-white técnico & Gris frío) ── */
+  --text-primary: #F0F5F2;       /* Off-white técnico (contraste 17.4:1 sobre canvas) */
+  --text-secondary: #98ABA2;     /* Gris frío botánico (contraste 7.2:1) */
+  --text-muted: #5E7369;         /* Metadatos secundarios y separadores */
+
+  /* ── 4. ACCENTS & SEMANTIC STATES (10% Accent Budget) ── */
+  --accent-primary: #7CE83A;     /* Verde eléctrico / Limón tech */
+  --accent-primary-hover: #92F252;
+  --accent-Secondary: #12D6B0;   /* Teal bioluminiscente */
+  --accent-sensor: #22D3EE;      /* Cian de sensores (escaneo IA / telemetría óptica) */
+
+  /* Estados semánticos */
+  --state-success: #2EE58D;      /* Éxito / Aprobado */
+  --state-pending: #22D3EE;      /* Analizando / Pendiente (Cian sensor) */
+  --state-warning: #F5A623;      /* Ámbar técnico (Solicitar más evidencia / sin EXIF) */
+  --state-error: #F26457;        /* Coral técnico (Rechazo o error sin rojo alarma vulgar) */
+
+  /* ── 5. TYPOGRAPHY FAMILIES ── */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* ── 6. SPACING, RADIUS & ELEVATION ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --elevation-1: 0 12px 32px -8px rgba(0, 0, 0, 0.55);
+}
+
+@layer base {
+  #root {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: initial;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    letter-spacing: 0.005em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-tech {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ── ATMOSPHERIC SENSOR GRID & LIDAR OVERLAYS ── */
+.bg-sensor-grid {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, rgba(240, 245, 242, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(240, 245, 242, 0.035) 1px, transparent 1px);
+}
+
+.bg-forest-circuit-gradient {
+  background: radial-gradient(circle at 50% 0%, rgba(18, 214, 176, 0.09) 0%, rgba(124, 232, 58, 0.03) 35%, rgba(7, 13, 10, 0) 70%);
+}
+
+/* ── AI VISION SCANLINE MICROINTERACTION (COMPOSITOR ONLY) ── */
+@keyframes visionScan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(320%);
+    opacity: 0.15;
+  }
+}
+
+.animate-vision-scan {
+  animation: visionScan 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-vision-scan {
+    animation: none;
+  }
+}

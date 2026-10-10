@@ -1,0 +1,10 @@
+# ADR-004 — Workers AI / Gemma 4 Vision con despliegue condicionado
+
+- **Estado:** Accepted (elección arquitectónica); **verificación del proveedor: pendiente / release gate**
+- **Fecha:** 2026-10-10
+- **Contexto:** validar foto+texto mediante API visual gratuita para beta española. Gemini API Free Tier y Meta Llama 3.2 Vision habían presentado restricciones de condiciones de uso para el caso europeo. No se acepta activar facturación.
+- **Decisión:** adaptador backend de IA a Cloudflare Workers AI REST con `@cf/google/gemma-4-26b-a4b-it`, documentado con visión y disponible en Workers Free dentro de 10.000 neuronas diarias. Credenciales secretas de servidor. Dictamen estructurado `APPROVED | NEEDS_EVIDENCE | REJECTED`; errores técnicos nunca aprueban; al superar cuota, `TECHNICAL_ERROR`/reintento y sin pagos.
+- **Alternativas:** Gemini Free Tier (condiciones para una app pública EEE por confirmar/descartado según análisis previo); Meta Llama 3.2 Vision (restricciones para desarrolladores en UE); API comercial (viola coste cero); heurísticas locales (no aportan validación visual equivalente).
+- **Riesgos/consecuencias:** Workers AI es un servicio de terceros, sujeto a licencia Gemma, límites, calidad, privacidad y posibles cambios. El servicio declara que no usa Customer Content para entrenar modelos sin consentimiento, pero debe revisarse tratamiento y marco aplicable a fotos reales. La licencia y el acceso de **esta cuenta concreta no se han probado**. No activar la beta pública sin validación técnica/legal básica.
+- **Verificación:** realizar pruebas positivas/negativas con fotos de prueba, respuestas estructuradas, límites gratuitos, error 429, timeout y rechazo de peticiones malformadas. Revisar licencia Gemma y DPA según necesidades del equipo.
+- **Fuentes:** https://developers.cloudflare.com/workers-ai/models/gemma-4-26b-a4b-it/ ; https://developers.cloudflare.com/workers-ai/platform/pricing/ ; https://developers.cloudflare.com/workers-ai/platform/data-usage/ ; https://ai.google.dev/gemma/terms/
